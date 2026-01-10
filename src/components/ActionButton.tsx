@@ -1,6 +1,14 @@
 import './ActionButton.css';
 
-const ActionButton = ({ icon: Icon, label, onClick }) => {
+import type { ComponentType, SVGProps } from "react";
+
+type ActionButtonProps = {
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
+  label: string;
+  onClick?: () => void;
+};
+
+const ActionButton = ({ icon: Icon, label, onClick }: ActionButtonProps) => {
   return (
     <div className="action-button">
       <button

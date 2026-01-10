@@ -1,9 +1,14 @@
-import React from 'react';
 import './ProjectCard.css';
 import { ExternalLink } from 'lucide-react';
 import ActionButton from './ActionButton';
 
-const ProjectCard = ({ title, description, link }) => {
+type ProjectCardProps = {
+  title: string;
+  description: string;
+  link?: string;
+};
+
+const ProjectCard = ({ title, description, link }: ProjectCardProps) => {
   return (
     <div className="project-card">
       <div className="project-card-header">
@@ -17,7 +22,7 @@ const ProjectCard = ({ title, description, link }) => {
           <ActionButton
             icon={ExternalLink}
             label="View Project"
-            onClick={() => window.open(link, '_blank')}
+            onClick={() => window.open(link, '_blank', 'noopener,noreferrer')}
           />
         </div>
       )}
