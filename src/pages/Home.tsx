@@ -1,6 +1,6 @@
-import ActionButton from '../components/ActionButton';
+import ActionButton from '@/components/ActionButton';
+import ActionGroup from '@/components/ActionGroup';
 import { MailIcon, PersonStanding, FileCodeCorner } from 'lucide-react';
-import ActionGroup from '../components/ActionGroup';
 
 const Home = () => {
   return (

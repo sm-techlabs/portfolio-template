@@ -1,5 +1,4 @@
-import React from 'react';
-import ProjectCard from '../components/ProjectCard';
+import ProjectCard from '@/components/ProjectCard';
 
 const projects = [
   {
