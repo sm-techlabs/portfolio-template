@@ -1,23 +1,25 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
-import { fileURLToPath } from 'node:url';
-import { dirname } from 'node:path';
-import { profile } from "./src/user";
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
+import { fileURLToPath, URL } from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
 
+  return {
+    // Base path: works for GitHub Pages, forks, and custom domains
+    base: env.VITE_BASE_PATH || '/',
 
-export default defineConfig({
-  base: "/portfolio-template/",
-  plugins: [react()],
-  define: {
-    'import.meta.env.VITE_PROFILE_NAME': JSON.stringify(profile.name),
-  },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src")
-    }
-  },
+    plugins: [react()],
+
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+      },
+    },
+
+    // Explicit, safe, and predictable
+    define: {
+      __APP_PROFILE_NAME__: JSON.stringify(env.VITE_PROFILE_NAME),
+    },
+  };
 });
