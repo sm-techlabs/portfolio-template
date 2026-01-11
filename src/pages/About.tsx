@@ -1,15 +1,13 @@
+import { aboutData } from '@/user';
+
 const About = () => {
   return (
     <main className="page-content">
-      <h1>About Me</h1>
-      <p>
-        I am a dedicated software engineer with a strong background in web development.
-        My expertise lies in building responsive and user-friendly applications.
-        I enjoy learning new technologies and solving complex problems.
-      </p>
-      <p>
-        In my free time, I enjoy coding, hiking, and exploring new cafes.
-      </p>
+      <h1>{aboutData.title}</h1>
+
+      {aboutData.paragraphs.map((paragraph, index) => (
+        <p key={index}>{paragraph}</p>
+      ))}
     </main>
   );
 };

@@ -8,23 +8,7 @@ import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
   globalIgnores(["dist"]),
-
-  // JS / JSX (mostly irrelevant now, but harmless)
-  {
-    files: ["**/*.{js,jsx}"],
-    extends: [
-      js.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-    ],
-    languageOptions: {
-      ecmaVersion: "latest",
-      globals: globals.browser,
-      sourceType: "module",
-    },
-  },
-
-  // TS / TSX (this is the important part)
+  // TS / TSX
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
@@ -32,25 +16,37 @@ export default defineConfig([
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
-        project: true
+        project: true,
       },
       globals: globals.browser,
     },
     plugins: {
       "@typescript-eslint": tseslint,
     },
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
     rules: {
-      // Ban `any` type
-      "@typescript-eslint/no-explicit-any": [
-        "error",
-        { fixToUnknown: true }
-      ],
+      // 🚫 Disable base rule (WRONG for TS)
+      "no-unused-vars": "off",
 
-      // Nice-to-haves
+      // ✅ TS-aware unused vars & imports
       "@typescript-eslint/no-unused-vars": [
         "error",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^[A-Z_]" }
-      ]
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+        },
+      ],
+
+      // 🚫 Ban `any`
+      "@typescript-eslint/no-explicit-any": [
+        "error",
+        { fixToUnknown: true },
+      ],
     },
   },
 ]);

@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import './Header.css';
+import { profile } from '@/user';
 
 const Header = () => {
   return (
     <header className="navbar">
       <div className="navbar-logo">
-        Name
+        {profile.name} | {profile.role}
       </div>
 
       <nav className="navbar-links">

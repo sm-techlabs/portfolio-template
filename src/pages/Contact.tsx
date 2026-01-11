@@ -1,12 +1,24 @@
+import { contactData } from '@/user';
+
 const Contact = () => {
   return (
     <main className="page-content">
-      <h1>Contact Me</h1>
-      <p>Feel free to reach out to me via email or connect on social media!</p>
+      <h1>{contactData.title}</h1>
+      <p>{contactData.intro}</p>
+
       <ul>
-        <li>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
-        <li>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">yourprofile</a></li>
-        <li>GitHub: <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">yourusername</a></li>
+        {contactData.links.map((link) => (
+          <li key={link.label}>
+            {link.label}:{' '}
+            <a
+              href={link.href}
+              target={link.href.startsWith('http') ? '_blank' : undefined}
+              rel="noopener noreferrer"
+            >
+              {link.value}
+            </a>
+          </li>
+        ))}
       </ul>
     </main>
   );

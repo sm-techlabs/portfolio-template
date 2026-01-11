@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import ActionButton from '@/components/ActionButton';
 import ActionGroup from '@/components/ActionGroup';
-import { MailIcon, PersonStanding, FileCodeCorner } from 'lucide-react';
+import { homeData } from '@/user';
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -9,29 +10,18 @@ const Home = () => {
   return (
     <main className="page-content">
       <section className="hero-section">
-        <h1>Hello, I'm #Name#</h1>
-        <p>
-          You have somehow found your way here. A rare treat, enjoyed by few.
-          <br />
-          Check out this kick-ass portfolio.
-        </p>
+        <h1>{homeData.heading}</h1>
+        <p>{homeData.subheading}</p>
 
         <ActionGroup>
-          <ActionButton
-            icon={PersonStanding}
-            label="About me"
-            onClick={() => navigate('/about')}
-          />
-          <ActionButton
-            icon={FileCodeCorner}
-            label="View My Projects"
-            onClick={() => navigate('/projects')}
-          />
-          <ActionButton
-            icon={MailIcon}
-            label="Contact Me"
-            onClick={() => navigate('/contact')}
-          />
+          {homeData.actions.map((action) => (
+            <ActionButton
+              key={action.label}
+              icon={action.icon}
+              label={action.label}
+              onClick={() => navigate(action.route)}
+            />
+          ))}
         </ActionGroup>
       </section>
     </main>
