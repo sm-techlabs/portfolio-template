@@ -12,10 +12,12 @@ import { HomePage } from './Home/Home.page';
 import { AboutPage } from './About/About.page';
 import { ProjectsPage } from './Projects/Projects.page';
 import { ContactPage } from './Contact/Contact.page';
+import { ResumePage } from './Resume/Resume.page';
 
 export const pages: PageDefinition[] = [
   HomePage,
   AboutPage,
   ProjectsPage,
+  ResumePage,
   ContactPage,
 ];
